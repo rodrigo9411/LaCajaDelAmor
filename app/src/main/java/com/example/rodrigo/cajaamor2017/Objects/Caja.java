@@ -16,6 +16,8 @@ public class Caja {
     private String sDonacion;
     private String sRespon;
 
+    public Caja() {
+    }
 
     public Caja(String sId, String sNumero, String sFamilia, String sDestino, String sStatus, String sEntregada, String sTele, String sDonacion, String sRespon) {
         this.sId = sId;

@@ -43,8 +43,8 @@ public class PendingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showDelivered();
-                binding.BTNEntre.setBackgroundColor(ContextCompat.getColor(PendingActivity.this,R.color.colorPrimaryDark));
-                binding.BTNPen.setBackgroundColor(ContextCompat.getColor(PendingActivity.this,R.color.colorAccent));
+                binding.BTNEntre.setVisibility(View.INVISIBLE);
+                binding.BTNPen.setVisibility(View.VISIBLE);
 
             }
         });
@@ -53,23 +53,23 @@ public class PendingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showPendending();
-                binding.BTNEntre.setBackgroundColor(ContextCompat.getColor(PendingActivity.this,R.color.colorAccent));
-                binding.BTNPen.setBackgroundColor(ContextCompat.getColor(PendingActivity.this,R.color.colorPrimaryDark));
+                binding.BTNEntre.setVisibility(View.VISIBLE);
+                binding.BTNPen.setVisibility(View.INVISIBLE);
 
             }
         });
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         binding.rvPending.setLayoutManager(mLayoutManager);
         binding.rvPending.setItemAnimator(new DefaultItemAnimator());
-//
-        DividerItemDecoration divider = new DividerItemDecoration(binding.rvPending.getContext(),mLayoutManager.getOrientation());
-        binding.rvPending.addItemDecoration(divider);
+
+        showPendending();
 
 
     }
 
     public void showPendending() {
         //Get product list in db when db exists
+        binding.progressBar2.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -80,6 +80,7 @@ public class PendingActivity extends AppCompatActivity {
                 binding.rvPending.post(new Runnable() {
                     @Override
                     public void run() {
+                        binding.progressBar2.setVisibility(View.GONE);
                         binding.rvPending.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }
@@ -93,6 +94,7 @@ public class PendingActivity extends AppCompatActivity {
     }
 
     public void showDelivered() {
+        binding.progressBar2.setVisibility(View.VISIBLE);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -104,8 +106,10 @@ public class PendingActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Set adapter for listview
+                        binding.progressBar2.setVisibility(View.GONE);
                         binding.rvPending.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
+
                     }
                 });
             }

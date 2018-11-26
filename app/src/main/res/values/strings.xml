@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">CajaAmor2017</string>
+    <string name="app_name">CajaAmor2018</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Rodrigo Ramirez, 2017</string>
+    <string name="action_settings">Rodrigo Ramirez, 2018</string>
 </resources>

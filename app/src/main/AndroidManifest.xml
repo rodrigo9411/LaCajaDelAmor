@@ -15,7 +15,7 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="La Caja Del Amor 2017"
+            android:label="La Caja Del Amor 2018"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,6 +43,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+
+        <activity android:name=".CloudBackupActivity"
+            android:label="Ingreso Manual"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4a450c4e5e1046e330c05598a52f3be972104f48" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

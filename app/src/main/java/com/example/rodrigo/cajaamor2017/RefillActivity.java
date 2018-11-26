@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.rodrigo.cajaamor2017.Helpers.DatabaseHelper;
+import com.example.rodrigo.cajaamor2017.Objects.Caja;
 import com.example.rodrigo.cajaamor2017.databinding.ActivityRefillBinding;
 
 /**
@@ -53,11 +54,12 @@ public class  RefillActivity extends AppCompatActivity {
     }
 
     public void readFromDB() {
-        binding.tvBoxNo.setText(myDbHelper.getCajaById(sCode).getsNumero());
-        binding.tvResponsible.setText(myDbHelper.getCajaById(sCode).getsRespon());
-        binding.tvResPhone.setText(myDbHelper.getCajaById(sCode).getsTele());
-        binding.tvStatus.setText(myDbHelper.getCajaById(sCode).getsStatus());
-        binding.tvDeliveredTo.setText(myDbHelper.getCajaById(sCode).getsEntregada());
+        Caja caja = myDbHelper.getCajaById(sCode);
+        binding.tvBoxNo.setText(caja.getsNumero());
+        binding.tvResponsible.setText(caja.getsRespon());
+        binding.tvResPhone.setText(caja.getsTele());
+        binding.tvStatus.setText(caja.getsStatus());
+        binding.tvDeliveredTo.setText(caja.getsEntregada());
 
     }
     public void updateRegister()

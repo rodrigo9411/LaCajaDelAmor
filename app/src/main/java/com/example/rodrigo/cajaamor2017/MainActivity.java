@@ -18,8 +18,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.rodrigo.cajaamor2017.Helpers.DatabaseHelper;
 
+import io.fabric.sdk.android.Fabric;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -30,11 +32,13 @@ public class MainActivity extends AppCompatActivity
 
     TextView tvPending, tvDone;
     DatabaseHelper mDBHelper;
+    FloatingActionButton fab;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,11 +67,22 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        tvPending = (TextView) findViewById(R.id.tvPending);
-        tvDone = (TextView) findViewById(R.id.tvDone);
+        tvPending = findViewById(R.id.tvPending);
+        tvDone = findViewById(R.id.tvDone);
+        fab = findViewById(R.id.fab);
 
         tvPending.setText(mDBHelper.getCountPendientes());
         tvDone.setText(mDBHelper.getCountEntregadas());
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,ScanningActivity.class);
+                startActivity(i);
+            }
+        });
+
+
     }
 
     @Override
@@ -120,15 +135,14 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_scan) {
-            // Handle the camera action
-            Intent i = new Intent(this,ScanningActivity.class);
-            startActivity(i);
-        } else if (id == R.id.nav_pending) {
+        if (id == R.id.nav_pending) {
             Intent i = new Intent(this,PendingActivity.class);
             startActivity(i);
         } else if (id == R.id.nav_manual) {
             Intent i = new Intent(this,ManualInputActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_cloud) {
+            Intent i = new Intent(this, CloudBackupActivity.class);
             startActivity(i);
         }
 

@@ -51,6 +51,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public List<Caja> getListCajas() {
+        Caja Caja = null;
+        List<Caja> CajaList = new ArrayList<>();
+        openDatabase();
+        Cursor cursor = mDatabase.rawQuery("select * from CajaAmor", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Caja = new Caja(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(5),cursor.getString(6),cursor.getString(7),cursor.getString(8));
+            CajaList.add(Caja);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        closeDatabase();
+        return CajaList;
+    }
+
     public List<Caja> getListDevueltas() {
         Caja Caja = null;
         List<Caja> CajaList = new ArrayList<>();
